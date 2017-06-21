@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TAB切换</title>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+        .wrap{
+            width:310px;
+            margin:20px auto 0;
+        }
+        ul{
+            font-size: 0;
+            border:1px solid #ccc;
+            padding:0;
+            margin:0;
+        }
+        ul li{
+            list-style: none;
+            display: inline-block;
+            width: 102px;
+            font-size: 14px;
+            text-align: center;
+            line-height:30px;
+            color:cadetblue;
+            border-right:1px solid #ccc;
+            cursor: pointer;
+            background: #fff;
+        }
+        li:last-child{
+            border-right:0;
+        }
+        .content{
+            position: relative;
+            width:310px;
+            height:200px;
+            overflow:hidden;
+        }
+        .view{
+            position: absolute;
+            width:310px;
+            top:0;
+        }
+        .panel{
+            width:100%;
+            height:200px;
+            color:#fff;
+            font-size: 20px;
+            text-align: center;
+        }
+        .view div:first-child{
+            background:#0bb;
+            top:0;
+        }
+        .view div:nth-child(2){
+            background:#bb0046;
+            top:200px;
+        }
+        .view div:last-child{
+            background:#b80;
+            top:400px;
+        }
+        ul .current{
+            background:#066;
+            color:#fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <ul>
+            <li class="current">tab1</li>
+            <li>tab2</li>
+            <li>tab3</li>
+        </ul>
+        <div class="content">
+            <div class="view">
+                <div class="panel">content1</div>
+                <div class="panel current">content2</div>
+                <div class="panel">content3</div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    
+   $("ul li").on('click',function(){
+       var $this = $(this);
+       var index = $this.index();
+       $this.addClass("current").siblings().removeClass("current");
+       if(index == 0){
+           $(".view").animate({
+              top:"0" 
+           },500)
+       } else if (index == 1) {
+            $(".view").animate({
+              top:"-200px" 
+           },500)
+       } else if (index == 2) {
+            $(".view").animate({
+              top:"-400px" 
+           },500)
+       }
+   })
+</script>
+</html>
