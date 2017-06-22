@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>切换</title>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+        *{
+            box-sizing: border-box;
+            list-style: none;
+            padding:0; 
+            margin:0;
+        }
+        .clearfix::after{
+            content:"";
+            display: table;
+            clear:both;
+        }
+        .main{
+            width:650px;
+            margin-top:50px;
+            margin-left:50px;
+            padding:10px;
+        }
+        .content{
+            width:630px;
+            padding:10px;
+        }
+        .content ul:nth-child(2){
+            display: none;
+        }
+        .content ul:nth-child(3){
+            display: none;
+        }
+        .content li{
+            position: relative;
+           float:left;
+           width:200px;
+           padding-left:20px;
+           margin-bottom:20px;
+        }
+        .content li img{
+            width:160px;
+            height:160px;
+        }
+        .content li h6{
+            font-size:16px;
+            width:160px;
+            overflow:hidden;
+            text-overflow: ellipsis;
+            white-space:nowrap;
+        }
+        .content li p{
+            margin-top:8px;
+            font-size:14px;
+            color:#f00;
+        }
+        .mask{
+            display: none;
+            position: absolute;
+            top:0;
+            left:0;
+            bottom:0;
+            right:0;
+            background:rgba(0,0,0,.4);
+        }
+        .mask span{
+            display: block;
+            position: absolute;
+            top:50%;
+            left:50%;
+            width:70px;
+            height:34px;
+            line-height:34px;
+            color:#f00;
+            background:#fff;
+            text-align: center;
+            border:1px solid #f00;
+            transform: translate(-50%,-50%);
+            border-radius:4px;
+            cursor: pointer;
+        }
+        button{
+            display: block;
+            width:70px;
+            height:34px;
+            background:#fff;
+            color:#f00;
+            text-align: center;
+            line-height:34px;
+            border:1px solid #f00;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div class="content">
+            <ul class="clearfix">
+                <li>
+                    <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1498107862024&di=fd2f4b0988ac9fb4505a27cdcf3449e2&imgtype=0&src=http%3A%2F%2Fwww.qqjia.com%2Fz%2F09%2Ftu11339_8.jpg" alt="">
+                    <h6>樱桃</h6>
+                    <p>￥50.00</p>
+                    <div class="mask">
+                        <span>购买</span>
+                    </div>
+                </li>
+                <li>
+                    <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1498107862024&di=fd2f4b0988ac9fb4505a27cdcf3449e2&imgtype=0&src=http%3A%2F%2Fwww.qqjia.com%2Fz%2F09%2Ftu11339_8.jpg" alt="">
+                    <h6>杨梅</h6>
+                    <p>￥50.00</p>
+                    <div class="mask">
+                        <span>购买</span>
+                    </div>
+                </li>
+                <li>
+                    <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1498107862024&di=fd2f4b0988ac9fb4505a27cdcf3449e2&imgtype=0&src=http%3A%2F%2Fwww.qqjia.com%2Fz%2F09%2Ftu11339_8.jpg" alt="">
+                    <h6>杨桃</h6>
+                    <p>￥50.00</p>
+                    <div class="mask">
+                        <span>购买</span>
+                    </div>
+                </li>
+                <li>
+                    <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1498107862024&di=fd2f4b0988ac9fb4505a27cdcf3449e2&imgtype=0&src=http%3A%2F%2Fwww.qqjia.com%2Fz%2F09%2Ftu11339_8.jpg" alt="">
+                    <h6>莲雾</h6>
+                    <p>￥50.00</p>
+                    <div class="mask">
+                        <span>购买</span>
+                    </div>
+                </li>
+                <li>
+                    <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1498107862024&di=fd2f4b0988ac9fb4505a27cdcf3449e2&imgtype=0&src=http%3A%2F%2Fwww.qqjia.com%2Fz%2F09%2Ftu11339_8.jpg" alt="">
+                    <h6>香蕉</h6>
+                    <p>￥50.00</p>
+                    <div class="mask">
+                        <span>购买</span>
+                    </div>
+                </li>
+                <li>
+                    <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1498107862024&di=fd2f4b0988ac9fb4505a27cdcf3449e2&imgtype=0&src=http%3A%2F%2Fwww.qqjia.com%2Fz%2F09%2Ftu11339_8.jpg" alt="">
+                    <h6>山竹</h6>
+                    <p>￥50.00</p>
+                    <div class="mask">
+                        <span>购买</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <button>添加</button>
+    </div>
+</body>
+<script>
+    var products = [
+	{
+		img: 'http://img10.360buyimg.com/N3/jfs/t2242/92/1446546284/374195/9196ac66/56af0958N1a723458.jpg',
+		name: '珂兰 黄金手 猴哥款',
+		price: '￥405.00'
+	},{
+		img: 'http://img10.360buyimg.com/N3/jfs/t2242/92/1446546284/374195/9196ac66/56af0958N1a723458.jpg',
+		name: '珂兰 黄金转运珠 猴哥款',
+		price: '￥100.00'
+	},{
+		img: 'http://img10.360buyimg.com/N3/jfs/t2242/92/1446546284/374195/9196ac66/56af0958N1a723458.jpg',
+		name: '珂兰 黄金手链 3D猴哥款',
+		price: '￥45.00'
+	}
+];
+$("button").on('click',function(){
+    for(var i = 0; i<products.length; i++){
+        var image = products[i].img;
+        console.log(image)
+        var title = products[i].name;
+        var price = products[i].price;
+        var newUnit = $("ul>li").eq(0).clone();
+        newUnit.find("img").attr('src',image)
+        newUnit.find("h6").text(title)
+        newUnit.find("p").text(price);
+        newUnit.appendTo("ul");
+    }
+})
+
+$(".content>ul").on('mouseenter','li',function(){
+        $(this).find(".mask").show();
+    })
+    $(".content>ul").on('mouseleave','li',function(){
+        $(this).find(".mask").hide();
+    })
+</script>
+</html>
