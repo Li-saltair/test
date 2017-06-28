@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>懒加载</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <script src="https://cdn.bootcss.com/jquery/3.2.0/jquery.js"></script>
+    <style>
+        ul{
+            margin:0;
+            padding:0;
+            width:820px;
+            margin:700px auto 0;
+        }
+        li{
+            float:left;
+            list-style: none;
+            width:400px;
+            height:200px;
+            line-height:200px;
+            margin:0 10px 20px 0;
+            outline:1px solid #bbb;
+        }
+        img{
+            width:400px;
+            height:200px;
+        }
+    </style>
+</head>
+    <body>
+        <div class="container">
+            <ul>
+               <li>
+                   <img src="http://via.placeholder.com/400x200" data-src="http://lorempixel.com/400/200/sports/" alt="">
+               </li>
+               <li>
+                   <img src="http://via.placeholder.com/400x200" data-src="http://lorempixel.com/400/200/sports/" alt="">
+               </li>
+               <li>
+                   <img src="http://via.placeholder.com/400x200" data-src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1498557115887&di=098032e408b01969de3275ba87a407c1&imgtype=0&src=http%3A%2F%2Fimg1.gtimg.com%2Fjiangsu%2Fpics%2Fhv1%2F184%2F160%2F1552%2F100959784.jpg" alt="">
+               </li>
+               <li>
+                   <img src="http://via.placeholder.com/400x200" data-src="http://lorempixel.com/400/200/" alt="">
+               </li>
+               <li>
+                   <img src="http://via.placeholder.com/400x200" data-src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1499151854&di=2327439b2215f3bc9da104573ac0462d&imgtype=jpg&er=1&src=http%3A%2F%2Fszbk.chuzhou.cn%2Fczrb%2Fres%2F1%2F1%2F2015-12%2F25%2FA02%2Fres16_attpic_brief.jpg" alt="">
+               </li>
+               <li>
+                   <img src="http://via.placeholder.com/400x200" data-src="http://lorempixel.com/400/200/sports/1/" alt="">
+               </li>
+               <li>
+                   <img src="http://via.placeholder.com/400x200" data-src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1498557201503&di=cc355abb5ea03819beff29a592085ca6&imgtype=0&src=http%3A%2F%2Fly.sz.bendibao.com%2FUpload%2FFCKEditor%2Fimage%2Fjpy%2F201010221356572187.jpg" alt="">
+               </li>
+               <li>
+                   <img src="http://via.placeholder.com/400x200" data-src="http://lorempixel.com/400/200/sports/Dummy-Text/" alt="">
+               </li>
+               <li>
+                   <img src="http://via.placeholder.com/400x200" data-src="http://lorempixel.com/400/200/sports/Dummy-Text/" alt="">
+               </li>
+               <li>
+                   <img src="http://via.placeholder.com/400x200" data-src="http://lorempixel.com/400/200/sports/Dummy-Text/" alt="">
+               </li>
+               <li>
+                   <img src="http://via.placeholder.com/400x200" data-src="http://lorempixel.com/400/200/" alt="">
+               </li>
+               <li>
+                   <img src="http://via.placeholder.com/400x200" data-src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1498557252180&di=13b69cac9000a801a266f1f83b41e0ca&imgtype=0&src=http%3A%2F%2Fi0.itc.cn%2F20111019%2F781_2249a532_430c_11d6_a2b1_a79cf31dbe0b_1.jpg" alt="">
+               </li>
+               <li>
+                   <img src="http://via.placeholder.com/400x200" data-src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=210369007,3860564277&fm=15&gp=0.jpg" alt="">
+               </li>
+               <li>
+                   <img src="http://via.placeholder.com/400x200" data-src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1498557355450&di=e0d0e5e86f07809b6d2a7480d3bf1de3&imgtype=0&src=http%3A%2F%2Fwww.gd.chinanews.com%2Fidx%2F2013%2F1127%2FU270P13T93D1F4259DT20131127154212.jpg" alt="">
+               </li>
+               <li>
+                   <img src="http://via.placeholder.com/400x200" data-src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1498557383459&di=9f8271c3aef50adaf909e8e355e4f599&imgtype=0&src=http%3A%2F%2Fwww.toolscaster.com.cn%2Fimg%2Fxqt%2F33189%2F33189_1.jpg" alt="">
+               </li>
+               <li>
+                   <img id="a" src="http://via.placeholder.com/400x200" data-src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1498557407941&di=c56937fb733682bed0b8f14c990f65cf&imgtype=0&src=http%3A%2F%2Ffile.joytrav.com%2Fimages%2F138251885061010903761862018787852.jpg" alt="">
+               </li>
+               <li>
+                   <img src="http://via.placeholder.com/400x200" data-src="http://lorempixel.com/400/200/" alt="">
+               </li>
+               <li>
+                   <img src="http://via.placeholder.com/400x200" data-src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1499150833&di=ee474f9adcf48ee422026618b4480e95&imgtype=jpg&er=1&src=http%3A%2F%2F4.share.photo.xuite.net%2Fdoris850125%2F1417a99%2F5070888%2F197895537_c.jpg" alt="">
+               </li>
+               <li>
+                   <img id="b" src="http://via.placeholder.com/400x200" data-src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1498556058903&di=4a5259aab76616384fb83d0a4da5b3ea&imgtype=0&src=http%3A%2F%2Fimgstore.cdn.sogou.com%2Fapp%2Fa%2F100540002%2F481521.jpg" alt="">
+               </li>
+               <li>
+                   <img src="http://via.placeholder.com/400x200" data-src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1498556419402&di=7bc19e77bb2c2ebb880b9012004999e4&imgtype=0&src=http%3A%2F%2Fpic.kekenet.com%2F2013%2F0409%2F82731365481142.jpg" alt="">
+               </li> 
+            </ul>
+        </div>
+        <script>
+            //思路：
+            //1. 现将所有图片的src地址放入一个自定义属性中,默认的src属性可以shiyongloading图片来代替或缺省图片来代替
+            //2. 当滚动页面时，图片是否出现在视野中，当出现之后，判断这张图片是否已经记载过，如果没有加载过，那么，加载这个图片
+            //3. 显示图片
+
+            lazyRender()
+
+            var clock;
+            $(window).on('scroll',function(){
+                if(clock){
+                    clearTimeout(clock)
+                }
+                clock = setTimeout(function(){
+                    lazyRender()
+                },300)
+            })
+
+            function lazyRender(){
+                $('img').each(function(){
+                    if( checkShow($(this)) && !isLoaded($(this)) ){
+                        loadImg($(this))
+                    }
+                })
+            }
+            function isLoaded($img){
+                return $img.attr('src') === $img.attr('data-src')
+            }
+
+            function checkShow($img){
+                var scroll = $(window).scrollTop();
+                var windowHeight = $(window).height();
+                var offsetTop = $img.offset().top;
+                if(offsetTop < scroll + windowHeight  && offsetTop > scroll){
+                    return true
+                }
+                return false
+            }
+            function loadImg($img){
+                $img.attr('src',$img.attr('data-src'))
+            }
+        </script>
+    </body>
+</html>
