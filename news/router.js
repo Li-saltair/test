@@ -1,0 +1,96 @@
+app.get('/getNews',function(req,res){
+
+    var news = [
+    {
+      link:'http://www.uisdc.com/the-truly-photography-composition',
+      img:'http://image.uisdc.com/wp-content/uploads/2016/02/designer-review-color-green-1.jpg',
+      title:'什么才是真正的构图',
+      content:'首先我实名反对一谈起构图就只摆出三分法、对称…'
+    },
+    {
+     link:'http://www.uisdc.com/color-tools-for-ux-designers',
+      img:'http://image.uisdc.com/wp-content/uploads/2017/06/color-tools-for-ux-designers-1.jpg',
+      title:'科学地搞定配色',
+      content:'设计师所熟练使用的诸多工具中，色彩绝对是最重要的一种…' 
+    },
+    {
+     link:'http://www.uisdc.com/speak-to-pantone-ceo',
+      img:'http://image.uisdc.com/wp-content/uploads/2016/12/speak-to-pantone-ceo-1.jpg',
+      title:'潘通发布2017年流行色',
+      content:'2017 年度色彩草木绿闪亮登场后引发了一众讨论…' 
+    },
+    {
+     link:'http://www.uisdc.com/2017-sdc-091',
+      img:'http://image.uisdc.com/wp-content/uploads/2017/06/app-design-slice-guideline-1.jpg',
+      title:'潘通流行色',
+      content:'首先我实名反对一谈起构图就只摆出三分法、对称…' 
+    },
+    {
+     link:'http://www.uisdc.com/the-truly-photography-composition',
+      img:'http://image.uisdc.com/wp-content/uploads/2017/06/6-design-trends-not-cool-1.jpg',
+      title:'字体设计原理与实战',
+      content:'首先我实名反对一谈起构图就只摆出三分法、对称…' 
+    },
+    {
+     link:'http://www.uisdc.com/9-useful-design-websites',
+      img:'http://image.uisdc.com/wp-content/uploads/2017/06/banner0622-5.jpg',
+      title:'9个超实用的设计网站',
+      content:'拯救UI设计于水火之中…' 
+    },
+    {
+     link:'http://www.uisdc.com/content-strategy-in-ux',
+      img:'http://image.uisdc.com/wp-content/uploads/2017/06/banner0622-3.jpg',
+      title:'为什么用户体验还是很烂',
+      content:'用户的思维会受文案内容、视频和图片的影响…' 
+    },
+    {
+     link:'http://www.uisdc.com/avoid-inflexible-impression-in-design',
+      img:'http://image.uisdc.com/wp-content/uploads/2017/06/banner0621-3.jpg',
+      title:'避免交互设计中的「刻板印象」',
+      content:'在合适的场景、时间、项目中，去最大化它的积极作用…' 
+    },
+    {
+     link:'http://www.uisdc.com/improve-phone-photography-level',
+      img:'http://image.uisdc.com/wp-content/uploads/2017/06/iphone-shotting-winner-skills-1.jpg',
+      title:'如何提高手机摄影水平',
+      content:'提高手机摄影水平，需要经过一些练习…' 
+    },
+    {
+     link:'http://www.uisdc.com/2017-flat-design-evolving-trend',
+      img:'http://image.uisdc.com/wp-content/uploads/2017/06/2017-flat-design-evolving-trend-1.jpg',
+      title:'一直进化的扁平化设计',
+      content:'平面化 VS 拟物化 的战争已经过去好几年了,扁平化设计彻底占据了如今的主流设计趋势。但是，大局已定的扁平化设计，是否已经固化不变了呢？…' 
+    },
+    {
+     link:'http://www.uisdc.com/8-methods-make-design-elegant',
+      img:'http://image.uisdc.com/wp-content/uploads/2017/06/2017.6.26-1.2.png',
+      title:'8个简单有效的方法帮你提升设计档次',
+      content:'在你的设计生涯里是否被人评价过自己的作品不够档次？不够档次这个评价到底该怎样去理解和反思？是否存在行之有效的方法去提升和规避？来看高手是怎么做的！' 
+    },
+    {
+     link:'http://www.uisdc.com/3-color-matching-methods',
+      img:'http://image.uisdc.com/wp-content/uploads/2017/06/2017.6.27-3.2.png',
+      title:'学会这3个方法，零基础也能做出好看的配色',
+      content:'认识了色彩，并不表示你就能对颜色运用自如。配色有理性的层面，也有感性的层面。配色也需要依循一定的节奏。有的配色跳跃明快，有的又显得舒缓柔和。' 
+    },
+    {
+     link:'http://www.uisdc.com/designer-in-ai-age',
+      img:'http://image.uisdc.com/wp-content/uploads/2017/06/2017.6.27-2.2.png',
+      title:'人工智能时代来临，设计师会被淘汰吗？',
+      content:'讲人工智能之前讲一大堆与人工智能不太相关的话题是有原因的，即使没有人工智能的出现，往后设计师面临的问题也很多，这些是时代或者人为造成的，与人工智能无关' 
+    },
+    {
+     link:'http://www.uisdc.com/10-ways-to-design-menus',
+      img:'http://image.uisdc.com/wp-content/uploads/2017/06/10-ways-to-design-menus-1.jpg',
+      title:'还有这种操作？这10个导航栏设计技巧别错过了',
+      content:'评判导航菜单的设计好坏有多种不同的维度，由于它太过常用，它的好坏并没有得到更多重视。实际上，导航作为网站设计的一个基础组成部分，对于可用性的要求并不低。' 
+    }
+  ]
+  var pageIndex = req.query.page;
+  var num = 3;
+  var retNews = news.slice(pageIndex*num, pageIndex*num+num);
+  res.send({
+      status:1,
+      data:retNews
+  })
+})
