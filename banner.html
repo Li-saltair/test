@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>banner切换</title>
+    <style>
+        *{margin:0 ;padding:0; list-style: none;}
+        #wrap{
+            position: relative;
+            width:1000px;height:357px;
+            margin: 100px auto 0;
+        }
+        #img-container{width:1000px; height:357px; overflow: hidden; position: relative;}
+        #img-container li{position: absolute; top:0; left:0; display: none;}
+        #img-container li:first-child{display: block;}
+        .show{display:block;}
+        #img-container li img{width:100%; height:100%;}
+        #wrap #prev{
+            position: absolute;
+            top:50%;left:20px; margin-top:-35px;
+            width:70px; height:70px;
+            background:rgba(0,0,0,.4);
+            text-align: center;
+            line-height: 70px;
+            color:#fff;
+            font-size:40px;
+            cursor: pointer;
+            -webkit-animation: slidein_left .5s forwards ease-in;
+        }
+        #wrap #next{
+            position: absolute;
+            top:50%;right:20px; margin-top:-35px;
+            width:70px; height:70px;
+            background:rgba(0,0,0,.4);
+            text-align: center;
+            line-height: 70px;
+            color:#fff;
+            font-size:40px;
+            cursor: pointer;
+            -webkit-animation: slidein_right .5s forwards ease-in;
+        }
+        #page{
+            position: absolute; left:50%; bottom:14px;
+        }
+        .clearfix:before,.clearfix:after { content: " "; display: table; }
+        #page ul li{
+            width:10px; height:10px; background:#bbb; border-radius: 50%; float:left; margin-right:10px;
+        }
+        #page ul li:last-child{
+           margin-right:0;
+        }
+        #img-container .movein_right{
+            -webkit-animation: slidein_right .5s forwards linear;
+            animation:slidein_right .5s forwards ease-in;
+            display: block;
+        }
+        #img-container .moveout_right{
+            -webkit-animation: slideout_right .5s forwards linear;
+            animation:slideout_right .5s forwards ease-in;
+            display: block;
+        }
+        #img-container .movein_left{
+            -webkit-animation: slidein_left .5s forwards linear;
+            animation:slidein_left .5s forwards ease-in;
+            display: block;
+        }
+        #img-container .moveout_left{
+            -webkit-animation: slideout_left .5s forwards linear;
+            animation:slideout_left .5s forwards ease-in;
+            display: block;
+        }
+        @keyframes slidein_left {
+            from {
+                -webkit-transform: translateX(-100%);
+                transform: translateX(-100%);
+            }
+            to {
+                -webkit-transform: translateX(0);
+                transform: translateX(0);
+            }
+        }
+        @-webkit-keyframes slideout_left{
+            from {
+                -webkit-transform: translateX(0);
+            }
+            to {
+                -webkit-transform: translateX(100%);
+            }
+        }
+        @-webkit-keyframes slideout_left{
+            from {
+                -webkit-transform: translateX(0);
+            }
+            to {
+                -webkit-transform: translateX(100%);
+            }
+        }
+
+        @keyframes slideout_left {
+            from {
+                -webkit-transform: translateX(0);
+                transform: translateX(0);
+            }
+            to {
+                -webkit-transform: translateX(100%);
+                transform: translateX(100%);
+            }
+        }
+        @-webkit-keyframes slidein_right{
+            from {
+                -webkit-transform: translateX(100%);
+            }
+            to {
+                -webkit-transform: translateX(0);
+            }
+        }
+
+        @keyframes slidein_right {
+            from {
+                -webkit-transform: translateX(100%);
+                transform: translateX(100%);
+            }
+            to {
+                -webkit-transform: translateX(0);
+                transform: translateX(0);
+            }
+        }
+        @-webkit-keyframes slideout_right{
+            from {
+                -webkit-transform: translateX(0);
+            }
+            to {
+                -webkit-transform: translateX(-100%);
+            }
+        }
+
+        @keyframes slideout_right {
+            from {
+                -webkit-transform: translateX(0);
+                transform: translateX(0);
+            }
+            to {
+                -webkit-transform: translateX(-100%);
+                transform: translateX(-100%);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrap">
+        <ul id="img-container">
+
+        </ul>
+        <div id="prev"> < </div>
+        <div id="next"> > </div>
+    </div>
+<script>
+    var prev = document.getElementById("prev");
+    var next = document.getElementById("next");
+    var arr = ["img/s.png","img/d.png","img/h.png","img/t.png","img/v.png"];
+    var imgContainer = document.getElementById("img-container");
+    var li = document.getElementsByTagName('li');
+    var timer = null;
+    if(arr.length>0){
+        for(var i = 0; i < arr.length; i++){
+            imgContainer.appendChild(document.createElement('li'));
+        }
+        for(var j=0; j<li.length; j++){
+            li[j].appendChild(document.createElement('img'));
+            var ttt = imgContainer.getElementsByTagName('img');
+        }
+    }
+    function banner(){
+        for(var f=0; f<ttt.length; f++){
+            ttt[f].src = arr[f];
+        }
+    }
+    banner();
+    var num = 0;
+    function start(){
+        li[num].setAttribute('class','moveout_right');
+        num++;
+        if(num < arr.length)
+            li[num].setAttribute('class','movein_right');
+        else {
+            num = 0;
+            li[num].setAttribute('class','movein_right');
+        }
+    }
+    next.onclick = function(){
+        li[num].setAttribute('class','moveout_right');
+        num++;
+        if(num < arr.length)
+            li[num].setAttribute('class','movein_right');
+        else {
+            num = 0;
+            li[num].setAttribute('class','movein_right');
+        }
+    };
+    prev.onclick = function(){
+        li[num].setAttribute('class','moveout_left');
+        num--;
+        if(num >= 0)
+            li[num].setAttribute('class','movein_left');
+        else {
+            num = arr.length-1;
+            li[num].setAttribute('class','movein_left');
+        }
+
+    };
+    /*自动播放*/
+    /*function autoplay(){
+        timer = setInterval(start,2000);
+    }
+    autoplay();
+    imgContainer.onmouseover = function () {
+        clearInterval(timer);
+    };
+    imgContainer.onmouseout = function () {
+        autoplay();
+    }*/
+
+</script>
+</body>
+</html>
