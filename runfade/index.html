@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery轮播</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.bootcss.com/jquery/3.2.0/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <ul id="imgct">
+            <li><a href="#"><img src="1.jpg"></a></li>
+            <li><a href="#"><img src="2.jpg"></a></li>
+            <li><a href="#"><img src="3.jpg"></a></li>
+            <li><a href="#"><img src="4.jpg"></a></li>
+        </ul>
+        <div class="page">
+            <ul>
+                <li class="active"></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+        <div class="run">
+            <div class="prev"><</div>
+            <div class="next">></div>
+        </div>
+    </div>
+</body>
+<script>
+    var $container = $('#imgct');
+    var $imgs = $('#imgct>li')
+    var imgLength = $('#imgct>li').length;
+    var $prevbtn = $('.prev');
+    var $nextbtn = $('.next');
+    var curPage = 0;
+    var $page = $('.page li');
+    var isRunning = false;
+    
+    fadeShow(0)
+    $nextbtn.on('click',function(){
+        playNext(1)
+    })
+    $prevbtn.on('click',function(){
+        playPrev(1)
+    })
+
+    function playNext(){
+        fadeShow((curPage + 1)%imgLength);
+    }
+
+    function playPrev(){
+        fadeShow((curPage+imgLength-1)%imgLength)       
+    }
+    function fadeShow(now){
+        if(isRunning){return};
+        isRunning = true
+        $imgs.eq(curPage).fadeOut(600);
+        $imgs.eq(now).fadeIn(600,function(){
+            isRunning = false
+        })
+        curPage = now
+        circle()
+    }
+
+    //下方小圆点跟随图片滚动
+    function circle(){
+        $page.removeClass('active').eq(curPage).addClass('active')
+    }
+
+    //小圆点点击事件
+    $page.on('click',function(){
+        var idx = $(this).index();
+        fadeShow(idx)
+    })
+
+    //setInterval(function(){playNext(1)},3000)
+</script>
+</html>
