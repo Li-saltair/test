@@ -1,0 +1,65 @@
+*{
+    padding:0;
+    margin:0;
+    list-style: none;
+}
+img{
+   width:729px;
+    height:456px; 
+}
+.container{
+    position: relative;
+    width:729px;
+    height:456px;
+    overflow:hidden;
+}
+.container>ul{
+    position: absolute;
+    overflow:hidden;
+}
+.container ul li{
+    float:left;
+}
+.container .page{
+    position: absolute;
+    bottom:12px;
+    left:50%;
+    transform: translate(-50%,0);
+    z-index:10;
+}
+.container .page ul li{
+    float:left;
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    background:#f69;
+    margin:0 6px;
+    cursor: pointer;
+}
+.run{
+    position: relative;
+    width:100%;
+    top:50%;
+}
+.run div{
+    position:absolute;
+    transform: translate(0,-50%);
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    background:rgba(255,255,255,.6);
+    text-align:center;
+    line-height:50px;
+    font-size:30px;
+    cursor: pointer;
+    font-weight: 900;
+}
+.run .prev{
+    left:10px;
+}
+.run .next{
+    right:10px;
+}
+.container .page ul .active{
+    background:#f96;
+}
