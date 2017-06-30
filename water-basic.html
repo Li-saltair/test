@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>瀑布流</title>
+    <script src="https://cdn.bootcss.com/jquery/3.2.0/jquery.min.js"></script>
+    <style>
+    .container{
+        position: relative;
+        width:1100px;
+        margin:auto;
+    }
+    .container>div{
+        position: absolute;
+        background:#fca;
+        width:200px;
+        margin-bottom:14px;
+        margin-right:14px;
+    }
+    .container>div:nth-child(2n){
+        background:#f77;
+    }
+    .container>div:nth-child(3n){
+        background:#38f
+    }
+    .container>div:nth-child(5n){
+        background:#fc0;
+    }
+    .container>div:nth-child(6n){
+        background:#f69
+    }
+    .container>div:nth-child(7n){
+        background:#6a9
+    }
+    .container>div:nth-child(4n){
+        background:#99f
+    }
+    .container>div:nth-child(8n){
+        background:#6a9
+    }
+    .h1{
+        height:180px;
+    }
+    .h2{
+        height:360px;
+    }
+    .h3{
+        height:260px;
+    }
+    .h4{
+        height:90px;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="h1">
+            <h6>第1</h6>
+        </div>
+        <div class="h2">
+            <h6>第2</h6>
+        </div>
+        <div class="h4">
+            <h6>第3</h6>
+        </div>
+        <div class="h1">
+            <h6>第4</h6>
+        </div>
+        <div class="h3">
+            <h6>第5</h6>
+        </div>
+        <div class="h2">
+            <h6>第6</h6>
+        </div>
+        <div class="h4">
+            <h6>第7</h6>
+        </div>
+        <div class="h2">
+            <h6>第8</h6>
+        </div>
+        <div class="h1">
+            <h6>第9</h6>
+        </div>
+        <div class="h4">
+            <h6>第10</h6>
+        </div>
+        <div class="h2">
+            <h6>第11</h6>
+        </div>
+        <div class="h3">
+            <h6>第12</h6>
+        </div>
+        <div class="h1">
+            <h6>第13</h6>
+        </div>
+        <div class="h4">
+            <h6>第14</h6>
+        </div>
+        <div class="h2">
+            <h6>第15</h6>
+        </div>
+        <div class="h1">
+            <h6>第16</h6>
+        </div>
+        <div class="h3">
+            <h6>第17</h6>
+        </div>
+        <div class="h2">
+            <h6>第18</h6>
+        </div>
+        <div class="h4">
+            <h6>第19</h6>
+        </div>
+        <div class="h4">
+            <h6>第20</h6>
+        </div>
+        <div class="h2">
+            <h6>第21</h6>
+        </div>
+        <div class="h1">
+            <h6>第22</h6>
+        </div>
+        <div class="h1">
+            <h6>第23</h6>
+        </div>
+        <div class="h3">
+            <h6>第24</h6>
+        </div>
+        <div class="h4">
+            <h6>第25</h6>
+        </div>
+        <div class="h2">
+            <h6>第26</h6>
+        </div>
+        <div class="h3">
+            <h6>第27</h6>
+        </div>
+        <div class="h2">
+            <h6>第28</h6>
+        </div>
+        <div class="h4">
+            <h6>第29</h6>
+        </div>
+        <div class="h1">
+            <h6>第30</h6>
+        </div>
+    </div>
+</body>
+<script>
+    //思路：
+    //首先是瀑布流的原理，横向排列的图片，宽度相同，高度不同，当排列完某一行之后，下一行的图片的第一张排列在上一行图片高度最小的一张的下面，后面的依次排列
+    //首先确定容器宽度可以放几列图片
+    //其次确定某一行的图片哪一个高度是最小的
+    //某个图片宽度的设置为上一行高度最小的乘这个高度最小的元素所在的那一行的第几个
+    //图片的高度就是上一行那个高度最小的元素的高度
+    //重置这一行的图片的高度，生成新的每一个的高度
+    //做的过程中出现的问题：没有认识到这个数组的本质事实上是保存某一横行的图片的高度的，或者说是知道了，但是过程中会存在定义的模糊
+    var unitWidth = $('.container div').width()
+    var row = []
+    var column = parseInt( $('.container').width() / unitWidth )
+
+    for(var i = 0; i<column; i++){
+        row[i] = 0
+    }
+    $('.container div').each(function(){
+        var minValue = Math.min.apply(null,row)
+        var minIndex = row.indexOf(minValue)
+        $(this).css({
+            top:row[minIndex],
+            left:minIndex * ($(this).outerWidth(true))
+        })
+        row[minIndex] += ($(this).outerHeight(true))
+    })
+</script>
+</html>
