@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>木桶布局</title>
+    <script src="https://cdn.bootcss.com/jquery/3.2.0/jquery.min.js"></script>
+    <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    #wrap{
+      width: 1000px;
+      margin: 0 auto;
+    }
+    .img-row {
+      margin-bottom: 8px;
+    }
+    .img-row:after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+    .img-box {
+      float: left;
+    }
+    .img-line .img-box:first-child {
+      padding-left: 0;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="wrap">
+        
+    </div>
+<script>
+    /*function barrel($ct){
+        this.$ct = $ct
+        //this.imgNum = 40
+        this.rowList = []
+        //this.baseHeight = 100
+        this.loadImg()
+    }
+    //原型内放的是公共方法
+    barrel.prototype = {
+        loadImg:function(){
+            var _this = this
+            var imgs = this.getImgUrls(100)
+            for(var i = 0; i<imgs.length; i++){
+                var img = new Image()       //这里的Image是一个方法：Image 对象代表嵌入的图像。<img> 标签每出现一次，一个 Image 对象就会被创建
+                img.src = imgs[i]
+                img.onload = function(){
+                    var imgInfo = {
+                        target: $(img),
+                        width: 200 * ( img.width / img.height ),
+                        height: 200,
+                    }
+                    _this.render(imgInfo)
+                }
+            }
+        },
+        render:function(imgInfo){
+            var ctWidth = this.$ct.width()  //容器宽度
+            var rowWidth = 0  //每一行的宽度和
+            var newRowHeight = 0   //每行的高度
+
+            this.rowList.push(imgInfo)
+            for(var i = 0; i<this.rowList.length; i++){
+                rowWidth += this.rowList[i].width
+            }
+            if(rowWidth > ctWidth){
+                this.rowList.pop()  //判断如果宽度超出，就删掉最后一个图片
+                newRowHeight = ctWidth *200 /rowWidth
+                this.layout(newRowHeight)       //在页面渲染（—一个函数）
+                this.rowList = []   //清空这个数组，因为这一行的元素已经选择出来了
+                this.rowList.push(imgInfo)
+            }
+        },
+
+        layout:function(newRowHeight){
+            var $rowct = $('<div class="img-row"></div>')
+            $.each(this.rowList,function(idx, imgInfo){
+                var $imgct = $('<div class="img-box"></div>'),
+                    $img = $(imgInfo.target);
+                $img.height(newRowHeight)
+                $imgct.append($img)
+                $rowct.append($imgct)
+            })
+            this.$ct.append($rowct)
+        },
+
+        getImgUrls : function(number){      //构造链接
+            var color, width, height, urls = []
+            for(var i = 0; i<number; i++){
+                color = Math.random().toString(16).substring(2,8)       //Number.toString()函数返回表示该数字的指定进制形式的字符串
+                width = Math.floor( Math.random() * 100 + 50 )
+                height = Math.floor( Math.random() * 30 + 50 )
+                urls.push( "https://placehold.it/" + width + 'x' + height + '/' + color + '/fff')
+            }
+            return urls
+        }
+    }
+
+    //创建一个实例
+    var view = new barrel($("#wrap"))
+*/
+function Barrels($ct) {
+      this.$ct = $ct;
+      this.imgNum = 40;
+      this.baseHeight = 100;
+      this.rowList = [];
+      this.loadImg();
+
+    }
+
+    Barrels.prototype = {
+
+      loadImg: function() {
+        var _this = this;
+        var imgUrls = this.getImgUrls(100);
+        $.each(imgUrls,function(idx, url){
+          console.log(url);
+          var img = new Image();
+          img.src = url;
+          img.onload = function(){
+            var originWidth = img.width,
+                originHeight = img.height,
+                ratio = originWidth/originHeight;
+
+            var imgInfo = {
+              target: $(img),
+              width: _this.baseHeight*ratio,
+              height: _this.baseHeight,
+              ratio: ratio
+            };
+            _this.render(imgInfo);
+          }
+        });
+      },
+
+
+      render: function(imgInfo){
+        var _this = this;
+        var rowList = this.rowList,
+            rowWidth = 0,
+            rowHeight = 0,
+            clientWidth = this.$ct.width(),
+            lastImgInfo = imgInfo;
+
+        this.rowList.push(imgInfo);
+
+        $.each(rowList,function(idx, imgInfo){
+          rowWidth += imgInfo.width;
+          if(rowWidth  > clientWidth ){
+            rowList.pop();
+            rowWidth = rowWidth - lastImgInfo.width;
+            rowHeight = clientWidth * _this.baseHeight / rowWidth;
+
+            _this.createRow(rowHeight);
+            _this.rowList = [];
+            _this.rowList.push(lastImgInfo);
+          }
+        });
+      },
+
+      createRow: function(rowHeight){
+        console.log('createRow');
+        var $rowCt = $('<div class="img-row"></div>');
+        $.each(this.rowList, function(idx, imgInfo){
+          var $imgCt = $('<div class="img-box"></div>'),
+              $img = imgInfo.target;
+              $img.height(rowHeight);
+              $imgCt.append($img);
+              $rowCt.append($imgCt);
+        });
+        //console.log(this.$ct)
+        this.$ct.append($rowCt);
+
+
+      },
+      getImgUrls: function(num) {
+        var color, width, height, urls = [];
+        for (var i = 0; i < num; i++) {
+          color = Math.random().toString(16).substring(2, 8);
+          width = Math.floor(Math.random() * 100 + 50);
+          height = Math.floor(Math.random() * 30 + 50);
+          urls.push("http://placehold.it/" + width + "x" + height + "/" + color + "/fff");
+        }
+        return urls;
+      }
+
+    }
+
+
+    var barrels = new Barrels($('#wrap'));
+</script>
+</body>
+</html>
